@@ -1,23 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import Cards from './components/Cards/Cards';
+import Login from './components/Login/Login';
+import {
+  Routes,
+  Route,
+} from "react-router-dom";
+import Header from './components/Header/Header';
+import { useState } from 'react';
+import Board from './components/Board/Board';
 
 function App() {
+  const [isUser, setIsUser] = useState(false)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main">
+      {/* {
+        isUser && <Header setIsUser={setIsUser}  />
+      } */}
+      <Routes>
+        <Route path="/" element={<Login setIsUser={setIsUser} />} />
+        <Route path="/game" element={<Cards setIsUser={setIsUser} />} />
+        <Route path="/board" element={<Board />} />
+      </Routes>
     </div>
   );
 }

@@ -1,0 +1,53 @@
+.game {
+  padding: 50px 0;
+  display: flex;
+  flex-direction: column;
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  h1 {
+    text-align: center;
+  }
+  gap: 20px;
+  &-counts {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 150px;
+    height: 46px;
+
+    border: 1px solid #fff;
+    border-radius: 5px;
+  }
+}
+
+.modal {
+  &-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 250px;
+    height: 46px;
+    border: none;
+    border-radius: 5px;
+  }
+  &-item {
+    span {
+      font-family: "Roboto", sans-serif;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 18px;
+      color: #000;
+    }
+  }
+}
