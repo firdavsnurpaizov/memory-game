@@ -5,7 +5,6 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import Header from './components/Header/Header';
 import { useState } from 'react';
 import Board from './components/Board/Board';
 
@@ -14,9 +13,6 @@ function App() {
 
   return (
     <div className="main">
-      {/* {
-        isUser && <Header setIsUser={setIsUser}  />
-      } */}
       <Routes>
         <Route path="/" element={<Login setIsUser={setIsUser} />} />
         <Route path="/game" element={<Cards setIsUser={setIsUser} />} />

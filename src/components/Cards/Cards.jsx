@@ -140,7 +140,7 @@ const Cards = ({ setIsUser }) => {
       <div className="game">
         <div className="game-header">
           <h1>Memory game</h1>
-          <div className="header-user__wrapper">
+          <div className="game-user__wrapper">
             <div>{user.name}</div>
             <svg
               onClick={logout}
