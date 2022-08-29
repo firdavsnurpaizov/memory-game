@@ -43,13 +43,13 @@ const Board = () => {
         </div>
         <div className="div-wrapper">
           <select className="score-select" onChange={handleChange}>
-            <option value="time">Time</option>
-            <option value="step">Step</option>
+            <option value="time">Время</option>
+            <option value="step">Счёт</option>
           </select>
         </div>
         <div className="score-titles">
           <h2>Игрок</h2>
-          <h2>Счёт</h2>
+          <h2>Кол-во ходов</h2>
         </div>
         {score
           ?.filter((item) => item.mode === mode)
