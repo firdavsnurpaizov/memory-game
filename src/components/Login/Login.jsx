@@ -45,7 +45,7 @@ const Login = ({ setIsUser }) => {
         <h3>Выберите уровень сложности:</h3>
         <div className="login-mode">
           <div>
-            <label  className="login-label" htmlFor="low">
+            <label className="login-label" htmlFor="low">
               Средний
               <input
                 defaultChecked
@@ -72,7 +72,9 @@ const Login = ({ setIsUser }) => {
             </label>
           </div>
         </div>
-
+        <Link className="link" to={"/board"}>
+          <button className="btn">Статистика</button>
+        </Link>
         {!isValid(value) ? (
           <Link className="link" to={"/game"}>
             <button className="btn" onClick={setData}>

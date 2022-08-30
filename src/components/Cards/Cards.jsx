@@ -19,7 +19,6 @@ const Cards = ({ setIsUser }) => {
   const [running, setRunning] = useState(false);
   const [card, setCard] = useState(items.length / 2);
   const [loading, setLoading] = useState(true);
-  // console.log(items);
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user")));
@@ -49,6 +48,7 @@ const Cards = ({ setIsUser }) => {
     setVisible(false);
     setPrev(-1);
     setCard(items.length / 2);
+    console.log();
     setItems(user?.mode === "low" ? lowDataItems : mediumDataItems);
     items.map((item) => {
       item.stat = "";
@@ -160,6 +160,7 @@ const Cards = ({ setIsUser }) => {
         <div className="game-counts">
           <div className="game-count">{count}</div>
           <Stopwatch
+            visible={visible}
             time={time}
             running={running}
             setRunning={setRunning}
@@ -189,7 +190,7 @@ const Cards = ({ setIsUser }) => {
             <span>Кол-во ходов:</span> {count}
           </p>
           <p className="modal-item">
-            <span>Общее время:</span> {Math.round(time / 1000) - 1}c.
+            <span>Общее время:</span> {Math.round(time / 1000)}c.
           </p>
           <p className="modal-item">
             <span>Счет:</span> {Math.round(time / 1000) * count}

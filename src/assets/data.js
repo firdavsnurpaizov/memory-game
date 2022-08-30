@@ -83,10 +83,14 @@ const dataItems = [
 
 
 
-const mediumDataItems = [...dataItems]
-    .sort(() => Math.random() - 0.5)
-const lowDataItems = [...dataItems].slice(0, 12)
-    .sort(() => Math.random() - 0.5)
+
+function mediumDataItems() {
+    return [...dataItems].sort(() => Math.random() - 0.5)
+}
+
+function lowDataItems() {
+    return [...dataItems].slice(0, 12).sort(() => Math.random() - 0.5)
+}
 
 export {
     lowDataItems,
