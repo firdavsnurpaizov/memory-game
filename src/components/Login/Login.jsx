@@ -7,6 +7,7 @@ import logo from "../../assets/img/logo.png";
 const Login = ({ setIsUser }) => {
   const [value, setValue] = useState("");
   const [checkedMode, setCheckedMode] = useState("low");
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   function getValue(e) {
     setValue(e.target.value);
@@ -26,23 +27,26 @@ const Login = ({ setIsUser }) => {
 
   return (
     <div className="login">
-        <div className="login-logo">
-          <img src={logo} alt="logo" />
+      <div className="login-logo">
+        <img src={logo} alt="logo" />
+      </div>
+      <div className="login-wrapper">
+        <h1>Введите имя</h1>
+        <div>
+          <input
+            value={user?.name}
+            className="login-input"
+            type="text"
+            onChange={(e) => getValue(e)}
+            placeholder="Введите имя"
+          />
         </div>
-        <div className="login-wrapper">
-          <h1>Введите имя</h1>
-          <div>
-            <input
-              className="login-input"
-              type="text"
-              onChange={(e) => getValue(e)}
-              placeholder="Введите имя"
-            />
-          </div>
 
-          <h3>Выберите уровень сложности:</h3>
-          <div className="login-mode">
-            <div>
+        <h3>Выберите уровень сложности:</h3>
+        <div className="login-mode">
+          <div>
+            <label  className="login-label" htmlFor="low">
+              Средний
               <input
                 defaultChecked
                 onChange={getChecked}
@@ -51,9 +55,12 @@ const Login = ({ setIsUser }) => {
                 id="low"
                 type="radio"
               />
-              <label htmlFor="low">Средний</label>
-            </div>
-            <div>
+              <span className="login-checkmark"></span>
+            </label>
+          </div>
+          <div>
+            <label className="login-label" htmlFor="medium">
+              Сложный
               <input
                 onChange={getChecked}
                 name="mode"
@@ -61,20 +68,21 @@ const Login = ({ setIsUser }) => {
                 id="medium"
                 type="radio"
               />
-              <label htmlFor="medium">Сложный</label>
-            </div>
+              <span className="login-checkmark"></span>
+            </label>
           </div>
-
-          {!isValid(value) ? (
-            <Link className="link" to={"/game"}>
-              <button className="btn" onClick={setData}>
-                Начать игру
-              </button>
-            </Link>
-          ) : (
-            <button className="btn">Начать игру</button>
-          )}
         </div>
+
+        {!isValid(value) ? (
+          <Link className="link" to={"/game"}>
+            <button className="btn" onClick={setData}>
+              Начать игру
+            </button>
+          </Link>
+        ) : (
+          <button className="btn">Начать игру</button>
+        )}
+      </div>
     </div>
   );
 };

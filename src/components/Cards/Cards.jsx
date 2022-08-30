@@ -5,11 +5,12 @@ import Card from "../Card/Card";
 import Stopwatch from "../StopWatch/StopWatch";
 import { Link, useNavigate } from "react-router-dom";
 import "./Cards.scss";
+import preloader from "../../assets/svg/preloader.svg";
 
 const Cards = ({ setIsUser }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const [items, setItems] = useState(
-    user.mode === "low" ? lowDataItems : mediumDataItems
+    user?.mode === "low" ? lowDataItems : mediumDataItems
   );
   const [prev, setPrev] = useState(-1);
   const [count, setCount] = useState(0);
@@ -17,22 +18,25 @@ const Cards = ({ setIsUser }) => {
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
   const [card, setCard] = useState(items.length / 2);
+  const [loading, setLoading] = useState(true);
+  // console.log(items);
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user")));
-    setItems(user.mode === "low" ? lowDataItems : mediumDataItems);
+    setItems(user?.mode === "low" ? lowDataItems : mediumDataItems);
     setIsUser(true);
 
     setCard(items.length / 2);
     items.map((item) => {
       item.stat = "";
     });
+    setLoading(false);
   }, []);
 
   useEffect(() => {
     if (card === 0) {
-      setVisible(true);
       setRunning(false);
+      setVisible(true);
       setScore();
     } else {
       setVisible(false);
@@ -45,7 +49,7 @@ const Cards = ({ setIsUser }) => {
     setVisible(false);
     setPrev(-1);
     setCard(items.length / 2);
-    setItems(user.mode === "low" ? lowDataItems : mediumDataItems);
+    setItems(user?.mode === "low" ? lowDataItems : mediumDataItems);
     items.map((item) => {
       item.stat = "";
     });
@@ -55,6 +59,7 @@ const Cards = ({ setIsUser }) => {
     if (items[current].id === items[prev].id) {
       items[current].stat = "correct";
       items[prev].stat = "correct";
+
       setItems([...items]);
       setPrev(-1);
       setTimeout(() => {
@@ -62,7 +67,7 @@ const Cards = ({ setIsUser }) => {
         items[prev].stat = "end";
         setItems([...items]);
         setPrev(-1);
-      }, 300);
+      }, 500);
       setCard(card - 1);
     } else {
       items[current].stat = "wrong";
@@ -73,7 +78,7 @@ const Cards = ({ setIsUser }) => {
         items[prev].stat = "";
         setItems([...items]);
         setPrev(-1);
-      }, 300);
+      }, 500);
     }
   }
 
@@ -118,7 +123,6 @@ const Cards = ({ setIsUser }) => {
     localStorage.setItem("score", JSON.stringify(allScore));
   }
 
-  // const [user, setUser] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -139,9 +143,9 @@ const Cards = ({ setIsUser }) => {
     <div className="container">
       <div className="game">
         <div className="game-header">
-          <h1>Memory game</h1>
+          <h2>Memory game</h2>
           <div className="game-user__wrapper">
-            <div>{user.name}</div>
+            <div>{user?.name}</div>
             <svg
               onClick={logout}
               width="24"
@@ -163,23 +167,29 @@ const Cards = ({ setIsUser }) => {
           />
         </div>
         <div className="container-game">
-          {items.map((item, i) => {
-            return (
-              <Card key={i} id={i} handleClick={handleClick} data={item} />
-            );
-          })}
+          {loading ? (
+            <img src={preloader} alt="preloader" />
+          ) : (
+            <>
+              {items.map((item, i) => {
+                return (
+                  <Card key={i} id={i} handleClick={handleClick} data={item} />
+                );
+              })}
+            </>
+          )}
         </div>
         <Modal className="modal" visible={visible} setVisible={setVisible}>
           <h1 className="modal-title">Игра окончена</h1>
           <p className="modal-item">
-            <span>Игрок:</span> {user.name}
+            <span>Игрок:</span> {user?.name}
           </p>
           <p className="modal-item">
             {" "}
             <span>Кол-во ходов:</span> {count}
           </p>
           <p className="modal-item">
-            <span>Общее время:</span> {Math.round(time / 1000)}c.
+            <span>Общее время:</span> {Math.round(time / 1000) - 1}c.
           </p>
           <p className="modal-item">
             <span>Счет:</span> {Math.round(time / 1000) * count}

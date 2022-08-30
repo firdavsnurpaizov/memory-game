@@ -71,6 +71,9 @@ const Board = () => {
           <Link className="link" to="/game">
             <button className="btn">Вернуться в игру</button>
           </Link>
+          <Link className="link" to="/">
+            <button className="btn">Вернуться на главное меню</button>
+          </Link>
         </div>
       </div>
     </div>

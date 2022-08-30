@@ -7,6 +7,8 @@
   transform: rotateY(180deg);
   animation: 2s hideCard linear;
   transition: transform 0.5s;
+  max-width: 150px;
+  max-height: 120px;
 
   &-image {
     object-fit: cover;

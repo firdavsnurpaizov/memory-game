@@ -12,19 +12,19 @@ body {
   font-size: 16px;
   line-height: 18px;
 
-  background-color:#c5dafc;
+  background-color: #c5dafc;
 }
 
 .container {
-  width: 650px;
+  max-width: 650px;
   margin: 0 auto;
   padding: 0 16px;
 }
 
 .container-game {
   display: grid;
-  grid-template-columns: repeat(4, minmax(100px, 150px));
-  grid-template-rows: repeat(4, minmax(100px, 150px));
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
   gap: 10px;
   padding-top: 50px;
 }
